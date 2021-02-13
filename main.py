@@ -9,10 +9,13 @@ from pygame.locals import *
 def hitBox(bird):
     if(bird.y+15 >= 700):
         bird.color=(0,0,0)
+        bird.hit = True
     if(bird.y+15 >= rect2.y and bird.x+15 >= rect2.x and bird.x <= rect2.x+rwidht):
         bird.color=(0,0,0)
+        bird.hit = True
     if(bird.y-15 <= rect1.height and bird.x+15 >= rect1.x and bird.x <= rect1.x+rwidht):
         bird.color=(0,0,0)
+        bird.hit = True
 
 
 
@@ -28,7 +31,7 @@ xpos = 300
 (rwidht, rheight) = (50, 250)
 
 rect1 = pygame.Rect(xpos,0,rwidht,rheight)
-rect2 = pygame.Rect(xpos,rheight+100,rwidht,700)
+rect2 = pygame.Rect(xpos,rheight+115,rwidht,700)
 
 clock = pygame.time.Clock()
 
@@ -58,7 +61,7 @@ while True:
     if(rect1.x < -rwidht):
         rect1.x = 550
         rect2.x = 550
-        rect1.height = random.randrange(50,650)
+        rect1.height = random.randrange(100,500)
         rect2.y = rect1.height+75
     hitBox(bird)
     clock.tick(60)
