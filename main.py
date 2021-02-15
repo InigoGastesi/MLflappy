@@ -27,15 +27,15 @@ def hitBox(bird):
 
 (width, height) = (500,700)
 
-xpos = 300
-(rwidht, rheight) = (50, 250)
+xpos = 500 
+(rwidht, rheight) = (30, 250)
 
 rect1 = pygame.Rect(xpos,0,rwidht,rheight)
 rect2 = pygame.Rect(xpos,rheight+115,rwidht,700)
 
 clock = pygame.time.Clock()
 
-speed = 1.0
+speed = 2.0
 bird = Bird(1, height)
 
 background = (0, 0, 0)
@@ -62,7 +62,7 @@ while True:
         rect1.x = 550
         rect2.x = 550
         rect1.height = random.randrange(100,500)
-        rect2.y = rect1.height+75
+        rect2.y = rect1.height+115
     hitBox(bird)
     clock.tick(60)
     pygame.display.update()

@@ -9,7 +9,7 @@ class Bird:
        self.y = 100
        self.color = (255,255,255)
        self.speed = -0.5
-       self.points = 0
+       self.points = 0.0 
        self.hit = False
 
     def draw(self, screen):
