@@ -54,7 +54,7 @@ while True:
     pygame.draw.rect(screen, (255,255,255), rect2)
     rect1.move_ip(-speed,0)
     rect2.move_ip(-speed,0)
-    bird.move()
+    bird.move(rect1.y, rect1.x)
     if(keyboard.is_pressed('space')):
         bird.up()
 
@@ -66,6 +66,3 @@ while True:
     hitBox(bird)
     clock.tick(60)
     pygame.display.update()
-
-
-

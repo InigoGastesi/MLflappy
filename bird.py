@@ -1,5 +1,7 @@
 import pygame
+import math
 from nn import Net
+import torch
 
 class Bird:
     def __init__(self, id, height):
@@ -18,11 +20,18 @@ class Bird:
             self.y = 0
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.size)
     
-    def move(self):
+    def move(self, rectY, rectX):
         if(not self.hit):
             self.speed = self.speed - 0.2
             self.y = self.y - self.speed
             self.points = self.points + 0.1
+        input = torch.tensor([self.y/500,self.speed/10.6, rectY/500, rectX/700])
+        output = self.net.fordward(input)
+        x = round(output.item())
+        if(x==0):
+            self.up()
+        
+
     
     def up(self):
         self.speed = 5.0
