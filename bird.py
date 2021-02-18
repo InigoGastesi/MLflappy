@@ -1,5 +1,5 @@
 import pygame
-
+from nn import Net
 
 class Bird:
     def __init__(self, id, height):
@@ -11,6 +11,7 @@ class Bird:
        self.speed = -0.5
        self.points = 0.0 
        self.hit = False
+       self.net = Net()
 
     def draw(self, screen):
         if(self.y <= 0):
