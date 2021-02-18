@@ -16,12 +16,14 @@ def hitBox(bird):
     if(bird.y-15 <= rect1.height and bird.x+15 >= rect1.x and bird.x <= rect1.x+rwidht):
         bird.color=(0,0,0)
         bird.hit = True
-
-
-
-
-
-
+def newGen():
+    birds.clear()
+    for i in range(1,10):
+        birds.append(Bird(i, height))
+    rect1.x = 550
+    rect2.x = 550
+    rect1.height = random.randrange(100,500)
+    rect2.y = rect1.height+115
 
 
 
@@ -36,10 +38,16 @@ rect2 = pygame.Rect(xpos,rheight+115,rwidht,700)
 clock = pygame.time.Clock()
 
 speed = 2.0
-bird = Bird(1, height)
 
 background = (0, 0, 0)
 screen = pygame.display.set_mode((width,height))
+
+birds = []
+
+for i in range(1,10):
+    birds.append(Bird(i, height))
+    
+
 
 
 while True:
@@ -49,20 +57,29 @@ while True:
             pygame.quit()
             sys.exit()
 
-    bird.draw(screen)
+    
     pygame.draw.rect(screen, (255,255,255), rect1)
     pygame.draw.rect(screen, (255,255,255), rect2)
     rect1.move_ip(-speed,0)
     rect2.move_ip(-speed,0)
-    bird.move(rect1.y, rect1.x)
-    if(keyboard.is_pressed('space')):
-        bird.up()
+    for bird in birds:
+        bird.move(rect1.y, rect1.x)
+        bird.draw(screen)
+
+#    if(keyboard.is_pressed('space')):
+#        bird.up()
 
     if(rect1.x < -rwidht):
         rect1.x = 550
         rect2.x = 550
         rect1.height = random.randrange(100,500)
         rect2.y = rect1.height+115
-    hitBox(bird)
+    
+    for bird in birds:
+        hitBox(bird)
+        if bird.hit:
+            birds.remove(bird)
+    if len(birds)<=2:
+        newGen()
     clock.tick(60)
     pygame.display.update()
