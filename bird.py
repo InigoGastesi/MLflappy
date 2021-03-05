@@ -35,3 +35,7 @@ class Bird:
     
     def up(self):
         self.speed = 5.0
+    
+    def getWeights(self):
+        return self.net.getWeights().tolist()
+   

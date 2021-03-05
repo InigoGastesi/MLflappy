@@ -5,6 +5,8 @@ from bird import Bird
 import time
 import sys
 from pygame.locals import *
+import numpy as np
+
 
 def hitBox(bird):
     if(bird.y+15 >= 700):
@@ -16,9 +18,18 @@ def hitBox(bird):
     if(bird.y-15 <= rect1.height and bird.x+15 >= rect1.x and bird.x <= rect1.x+rwidht):
         bird.color=(0,0,0)
         bird.hit = True
+
+
 def newGen():
+    weights = []
+    for bird in birds:
+        weights.append(bird.getWeights())    
+        print(bird.getWeights()) 
+    weights = np.array(weights)
+    print(weights.shape)
     birds.clear()
-    for i in range(1,10):
+    
+    for i in range(1,100):
         birds.append(Bird(i, height))
     rect1.x = 550
     rect2.x = 550
@@ -44,7 +55,7 @@ screen = pygame.display.set_mode((width,height))
 
 birds = []
 
-for i in range(1,10):
+for i in range(1,100):
     birds.append(Bird(i, height))
     
 
@@ -79,7 +90,7 @@ while True:
         hitBox(bird)
         if bird.hit:
             birds.remove(bird)
-    if len(birds)<=2:
-        newGen()
+        if len(birds)< 50:
+            newGen()
     clock.tick(60)
     pygame.display.update()
