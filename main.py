@@ -22,15 +22,18 @@ def hitBox(bird):
 
 def newGen():
     weights = []
-    for bird in birds:
+    for bird in newBirds:
         weights.append(bird.getWeights())    
-        print(bird.getWeights()) 
+
     weights = np.array(weights)
-    print(weights.shape)
-    birds.clear()
-    
-    for i in range(1,100):
-        birds.append(Bird(i, height))
+    newBirds.clear()
+
+    means = weights.mean(0)
+    sd = np.std(weights, 0)
+
+    for bird in newBirds:
+        birds.append(bird)
+
     rect1.x = 550
     rect2.x = 550
     rect1.height = random.randrange(100,500)
@@ -54,6 +57,7 @@ background = (0, 0, 0)
 screen = pygame.display.set_mode((width,height))
 
 birds = []
+newBirds = []
 
 for i in range(1,100):
     birds.append(Bird(i, height))
@@ -88,9 +92,13 @@ while True:
     
     for bird in birds:
         hitBox(bird)
+        
+        if len(birds)< 50:
+            newBirds.append(bird)
         if bird.hit:
             birds.remove(bird)
-        if len(birds)< 50:
-            newGen()
+
+    if len(birds) == 0:
+        newGen()
     clock.tick(60)
     pygame.display.update()
