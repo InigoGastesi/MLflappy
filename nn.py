@@ -15,3 +15,13 @@ class Net(nn.Module):
 
     def getWeights(self):
         return self.neuron.weight.numpy()
+
+    def setWeights(self, means=0, sd=1.0):
+        weights = []
+        for i in range(0,4):
+            s = np.random.normal(means[0][i], sd[0][i])
+            weights.append(s)
+        weights = torch.tensor(weights)
+        print(weights)
+        old = (self.neuron.state_dict())
+        old['weight'].copy_(weights)

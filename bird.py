@@ -2,9 +2,10 @@ import pygame
 import math
 from nn import Net
 import torch
+import numpy as np
 
 class Bird:
-    def __init__(self, id, height):
+    def __init__(self, means=np.array([0,0,0,0], ndmin=2), sd=np.array([1.0,1.0,1.0,1.0], ndmin=2)):
        self.id = id 
        self.size = 15
        self.x = 100
@@ -14,6 +15,8 @@ class Bird:
        self.points = 0.0 
        self.hit = False
        self.net = Net()
+       self.setWeights(means, sd)
+       
 
     def draw(self, screen):
         if(self.y <= 0):
@@ -38,4 +41,7 @@ class Bird:
     
     def getWeights(self):
         return self.net.getWeights().tolist()
+
+    def setWeights(self, means, sd):
+        self.net.setWeights(means, sd)
    

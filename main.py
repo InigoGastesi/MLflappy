@@ -33,6 +33,10 @@ def newGen():
 
     for bird in newBirds:
         birds.append(bird)
+    for i in range(0,49):
+        birds.append(Bird(means, sd))
+
+
 
     rect1.x = 550
     rect2.x = 550
@@ -60,7 +64,7 @@ birds = []
 newBirds = []
 
 for i in range(1,100):
-    birds.append(Bird(i, height))
+    birds.append(Bird())
     
 
 
