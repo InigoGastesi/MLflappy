@@ -22,6 +22,6 @@ class Net(nn.Module):
             s = np.random.normal(means[0][i], sd[0][i])
             weights.append(s)
         weights = torch.tensor(weights)
-        print(weights)
+        #print(weights)
         old = (self.neuron.state_dict())
         old['weight'].copy_(weights)
